@@ -11,6 +11,10 @@ use pocketmine\event\Listener;
 
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
+use pocketmine\entity\Entity;
+use pocketmine\entity\Living;
+
+use pocketmine\math\Vector3;
 
 use pocketmine\utils\TextFormat;
 
@@ -28,12 +32,19 @@ class Main extends PluginBase implements Listener {
     switch($cmd->getName()) {
       case "launch":
         if(!$sender instanceof Player) {
-          $sender->sendMessage("*console goes flying*")
+          $sender->sendMessage("*console goes flying*");
           return true;
         }
-        if (count($args) == 0 ){
+        if (count($args) == 0) {
           $sender->sendMessage(TextFormat::LIGHT_PURPLE.TextFormat::BOLD."Zooooom!");
+          $player = $sender->getPlayer();
+          $player->knockBack($player, 0, $player->getDirectionVector()->getX(), $player->getDirectionVector()->getZ(), 2);
+        }
+        
+        $sender->sendMessage(TextFormat::LIGHT_PURPLE.TextFormat::BOLD."Zooooom!");
+        $player = $sender->getPlayer();
+        $player->knockBack($player, 0, $player->getDirectionVector()->getX(), $player->getDirectionVector()->getZ(), $args[1]);
     }
-    return false;
+    return true;
   }
 }
