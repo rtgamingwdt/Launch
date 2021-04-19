@@ -19,7 +19,7 @@ public class Main extends JavaPlugin {
   }
   
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if(label.equalsIgnoreCase("launch")) {
+    if(label.equalsIgnoreCase("launch") || label.equalsIgnoreCase("lch")) {
       if(!(sender instanceof Player)) {
         sender.sendMessage("*Console goes flying*");
         return true;
